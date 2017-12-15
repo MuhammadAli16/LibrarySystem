@@ -7,7 +7,7 @@ public class MainRunner {
 
 	public static void main(String[] args) {
 		
-		LibrarySystem ls = new LibrarySystem();
+		LibrarySystem ls = LibrarySystem.getInstance();
 		PersonManager pm = new PersonManager();
 		
 		// add people

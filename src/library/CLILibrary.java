@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class CLILibrary {
 
-	static LibrarySystem ls = new LibrarySystem();
+	static LibrarySystem ls;// = LibrarySystem.getInstance();
 	static PersonManager pm = new PersonManager();
 
 	public static void main(String[] args) {
-		ls = new LibrarySystem();
+		ls = LibrarySystem.getInstance();
 		pm = new PersonManager();
 
 		// Add books
@@ -27,9 +27,10 @@ public class CLILibrary {
 	}
 
 	public void showMenu() {
-		Scanner sc = new Scanner(System.in);
+		
 
 		int input = 0;
+		boolean correctInput = false;
 
 		do {
 			System.out.println("MENU");
@@ -40,12 +41,16 @@ public class CLILibrary {
 			System.out.println("5.Update Book");
 			System.out.println("99.Quit");
 			try {
+				Scanner sc = new Scanner(System.in);
 				input = sc.nextInt();
+				if (input > 5 || input < 0){
+					correctInput = true;
+				}
 			} catch (Exception e) {
-				showMenu();
+				// chastise the user
 			}
 
-		} while (input > 5 || input < 0);
+		} while (!correctInput);
 		// sc.close();
 
 		// Depending on user input show relevant stuff
@@ -65,6 +70,7 @@ public class CLILibrary {
 		case 5:
 			break;
 		case 99:
+			System.exit(0);
 			break;
 		}
 	}

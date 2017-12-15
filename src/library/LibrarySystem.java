@@ -5,8 +5,16 @@ import java.util.ArrayList;
 public class LibrarySystem implements LibraryInterface {
 
 	private ArrayList<Item> libraryList = new ArrayList<>();
-	
-	public LibrarySystem(){
+
+	// create an object of SingleObject
+	private static LibrarySystem instance = new LibrarySystem();
+
+	private LibrarySystem() {
+	}
+
+	// Get the only object available
+	public static LibrarySystem getInstance() {
+		return instance;
 	}
 
 	@Override
@@ -28,7 +36,7 @@ public class LibrarySystem implements LibraryInterface {
 
 	@Override
 	public void removeBook(Item i) {
-		if (!i.isIstaken()){
+		if (!i.isIstaken()) {
 			libraryList.remove(i);
 		}
 	}
@@ -41,10 +49,10 @@ public class LibrarySystem implements LibraryInterface {
 	public ArrayList<Item> getLibraryList() {
 		return this.libraryList;
 	}
-	
-	public void checkFreeBooks(ArrayList<Item> libraryList){
-		for (Item i: libraryList){
-			if (i.isIstaken()){
+
+	public void checkFreeBooks(ArrayList<Item> libraryList) {
+		for (Item i : libraryList) {
+			if (i.isIstaken()) {
 				i.toString();
 			}
 		}
