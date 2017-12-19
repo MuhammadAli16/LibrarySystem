@@ -7,16 +7,15 @@ public abstract class Item {
 	private String title;
 	private String author;
 	private int publicationDate;
-	private boolean istaken;
+	private Integer takenUserID;
 	
 	
 	
-	public Item(String title, String author, int publicationDate, boolean istaken) {
+	public Item(String title, String author, int publicationDate) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.publicationDate = publicationDate;
-		this.istaken = istaken;
 		
 		this.id = counter++; 
 		
@@ -47,19 +46,21 @@ public abstract class Item {
 		this.publicationDate = publicationDate;
 	}
 	
-	public boolean isIstaken() {
-		return istaken;
+	public Integer getTakenUserID() {
+		return takenUserID;
 	}
-	
-	public void setIstaken(boolean istaken) {
-		this.istaken = istaken;
+
+	public void setTakenUserID(Integer takenUserID) {
+		this.takenUserID = takenUserID;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", title=" + title + ", author=" + author + ", publicationDate=" + publicationDate + ", istaken="
-				+ istaken + "]";
+		return "Item [id=" + id + ", title=" + title + ", author=" + author + ", publicationDate=" + publicationDate
+				+ ", takenUserID=" + takenUserID + "]";
 	}
+
+	
 	
 	
 	
