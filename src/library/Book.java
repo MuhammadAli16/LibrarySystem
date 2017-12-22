@@ -16,5 +16,14 @@ public class Book extends Item {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [publisher=" + publisher + ", getId()=" + getId() + ", getTitle()=" + getTitle() + ", getAuthor()="
+				+ getAuthor() + ", getPublicationDate()=" + getPublicationDate() + ", getTakenUserID()="
+				+ getTakenUserID() + "]";
+	}
+	
+	
 		
 }

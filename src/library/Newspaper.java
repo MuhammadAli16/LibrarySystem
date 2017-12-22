@@ -16,5 +16,14 @@ public class Newspaper extends Item{
 	public void setArticles(int articles) {
 		this.articles = articles;
 	}
+
+	@Override
+	public String toString() {
+		return "Newspaper [articles=" + articles + ", getId()=" + getId() + ", getTitle()=" + getTitle()
+				+ ", getAuthor()=" + getAuthor() + ", getPublicationDate()=" + getPublicationDate()
+				+ ", getTakenUserID()=" + getTakenUserID() + "]";
+	}
+	
+	
 	
 }

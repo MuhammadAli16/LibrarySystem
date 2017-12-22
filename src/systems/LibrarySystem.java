@@ -1,9 +1,12 @@
 package systems;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import library.Book;
 import library.Item;
@@ -11,20 +14,6 @@ import library.Newspaper;
 import library.Person;
 
 public class LibrarySystem implements LibraryInterface {
-
-	// IGNORE - Just here to add data to application
-	public void generateData() {
-		// Add books
-		Item book = new Book("Harry Potter", "JK", 1990, "");
-		Item book2 = new Book("Harry Potter 2", "JK", 1995, "");
-		addBook(book);
-		addBook(book2);
-		// Add people
-		Person bob = new Person("Bob", 35);
-		Person timmy = new Person("Timmy", 20);
-		getPersonManager().addPerson(bob);
-		getPersonManager().addPerson(timmy);
-	}
 
 	private ArrayList<Item> libraryList = new ArrayList<>();
 	private PersonManager personManager;
@@ -88,9 +77,13 @@ public class LibrarySystem implements LibraryInterface {
 	}
 
 	@Override
-	public void removeBook(Item i) {
-		if (i.getTakenUserID() != null) {
-			libraryList.remove(i);
+	public boolean removeItem(int itemID) {
+		Item item = findItem(itemID);
+		if (item.getTakenUserID() != null) {
+			libraryList.remove(item);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -119,7 +112,7 @@ public class LibrarySystem implements LibraryInterface {
 		return availBooks;
 	}
 
-	// TODO
+	// TODO check if works and need a method to convert arraylist to string
 	public void writeToFile(String path, String listStr) {
 		// Location and filename
 		FileWriter fw;
@@ -133,7 +126,50 @@ public class LibrarySystem implements LibraryInterface {
 			e.printStackTrace();
 		}
 	}
+	
+	// TODO continued from above
+	public String listToStr(ArrayList<Item> list){
+		
+		StringBuilder sb = new StringBuilder();
+		for (int x = 0; x < list.size(); x++){
+			sb.append(list.get(x).toString());
+			sb.append("\n");
+		}
+		
+		return sb.toString();
+		
+	}
+	
+	public void readFile(String path) {
 
+		// List to collect Employee objects
+		//ArrayList<Person> people = new ArrayList<Person>();
+		// Read data from file
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+			// Read file line by line
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+
+				String[] arrValues = line.split(", ");
+
+				System.out.println(Arrays.toString(arrValues));
+				//Person person = new Person(arrValues[0], arrValues[1], Integer.parseInt(arrValues[2]));
+
+				//people.add(person);
+			}
+
+		} catch (IOException e1) {
+			System.err.println("File might not exist!");
+			e1.printStackTrace();
+		}
+
+		
+		//return people;
+	}
+
+	// Method to find item by ID
 	Item findItem(int ID) {
 		for (Item item : libraryList) {
 			if (item.getId() == ID) {
@@ -142,5 +178,22 @@ public class LibrarySystem implements LibraryInterface {
 		}
 		return null;
 	}
+	
+	
+	// IGNORE - Just here to add data to application
+		public void generateData() {
+			// Add books
+			Item book = new Book("Harry Potter", "JK", 1990, "Disney Publishings");
+			Item book2 = new Book("Harry Potter 2", "JK", 1995, "Disney Publishings");
+			Item newsPaper = new Newspaper("Harry Potter 2", "JK", 1995, 30);
+			addBook(book);
+			addBook(book2);
+			addBook(newsPaper);
+			// Add people
+			Person bob = new Person("Bob", 35);
+			Person timmy = new Person("Timmy", 20);
+			getPersonManager().addPerson(bob);
+			getPersonManager().addPerson(timmy);
+		}
 
 }

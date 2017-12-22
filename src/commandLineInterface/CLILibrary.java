@@ -1,8 +1,10 @@
-package library;
+package commandLineInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import library.Item;
+import library.Person;
 import systems.LibrarySystem;
 
 public class CLILibrary {

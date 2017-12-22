@@ -12,8 +12,14 @@ public interface LibraryInterface {
 	
 	public void addBook(Item i);
 
-	public void removeBook(Item i);
+//	public void removeBook(Item i);
+//	boolean removeBook(int bookID);
+	boolean removeItem(int itemID);
 
 	public void updateItem(Item i);
+
+	
+
+	
 	
 }
